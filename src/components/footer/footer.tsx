@@ -1,5 +1,5 @@
 import Link from "next/link";
-import {BsFillSendFill, BsTelephoneOutbound} from "react-icons/bs";
+import {BsFillSendFill, BsGlobeCentralSouthAsia, BsTelephoneOutbound} from "react-icons/bs";
 import {BiMessageDetail} from "react-icons/bi";
 
 
@@ -15,18 +15,22 @@ const Footer = () =>{
 
                 <div className="flex flex-wrap gap-16 items-center justify-between">
                     <div className="flex flex-col">
-                        <p className="py-2">123 Road, Bhilar Taluka: Mahabaleshwar District: Satara </p>
+                        <div className="flex items-center py-2">
+                            <BsGlobeCentralSouthAsia/>
+                            <p className="ml-2">Bhilar-Bhose Road, Bhilar Taluka: Mahabaleshwar District: Satara </p>
+                        </div>
                         <div className="flex items-center py-2">
                             <BsFillSendFill />
-                            <p className="ml-2">dastagirmulani@gmail.com</p>
+                            <a className="ml-2" href='mailto:dastagirmulani333@gmail.com'>dastagirmulani333@gmail.com</a>
                         </div>
                         <div className="flex items-center py-2">
                             <BsTelephoneOutbound />
-                            <p className="ml-2">+91 87664 55837</p>
+                            <a className="ml-2" href='tel:+918766455837'>+91 87664 55837</a>
                         </div>
                         <div className="flex items-center pt-2">
                             <BiMessageDetail />
-                            <p className="ml-2">Code With Dastagir</p>
+                            <a className="ml-2" href="whatsapp://send?phone=+918766455837&text=Hi%20I%20want%20your%20help">Message Us !!</a>
+
                         </div>
                     </div>
                     <div className="flex-1 md:text-right">

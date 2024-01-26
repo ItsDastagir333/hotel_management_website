@@ -66,4 +66,4 @@ export async function POST(req: Request, res: Response) {
     console.log('Error Updating', error);
     return new NextResponse('Unable to create review', { status: 400 });
   }
-}``
+}

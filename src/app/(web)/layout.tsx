@@ -32,6 +32,7 @@ export default function RootLayout({
             <main className='font-normal'>
             <Header/>
             {children}
+            <div id='footer'/>
             <Footer/>
             </main>
           </ThemeProvider>

@@ -81,6 +81,15 @@ const UserDetails = (props: { params: { id: string } }) => {
     error: errorGettingUserData,
   } = useSWR('/api/users', fetchUserData);
 
+  // if (error || errorGettingUserData) {
+  //   return <div>Error: Unable to fetch user data</div>;
+  // }
+
+  // if (loadingUserData || !userData) {
+  //   return <LoadingSpinner />;
+  // }
+
+
   if (error || errorGettingUserData) throw new Error('Cannot fetch data');
   if (typeof userBookings === 'undefined' && !isLoading)
     throw new Error('Cannot fetch data');
@@ -88,7 +97,6 @@ const UserDetails = (props: { params: { id: string } }) => {
     throw new Error('Cannot fetch data');
 
   if (loadingUserData) return <LoadingSpinner />;
-  if (!userData) throw new Error('Cannot fetch data');
   if (!userData) throw new Error('Cannot fetch data');
 
   return (

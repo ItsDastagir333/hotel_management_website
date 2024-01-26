@@ -114,7 +114,7 @@ const UserDetails = (props: { params: { id: string } }) => {
           </div>
           <div className='font-normal py-4 text-left'>
             <h6 className='text-xl font-bold pb-3'>About</h6>
-            <p className='text-sm'>{userData.about ?? ''}</p>
+            <p className='text-sm'>{userData.about?? ''}</p>
           </div>
           <div className='font-normal text-left'>
             <h6 className='text-xl font-bold pb-3'>{userData.name}</h6>

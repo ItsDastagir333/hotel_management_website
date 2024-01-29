@@ -11,7 +11,7 @@ import axios from 'axios';
 import { getRoom } from '@/libs/apis';
 import LoadingSpinner from '../../loading';
 import HotelPhotoGallery from '@/components/HotelPhotoGallery/HotelPhotoGallery';
-import BookRoomCta from '@/components/BookRoomCta/BookRoomCta';
+import BookRoomCta from '@/components/BookRoomCTA/BookRoomCTA';
 import toast from 'react-hot-toast';
 import { getStripe } from '@/libs/stripe';
 import RoomReview from '@/components/RoomReview/RoomReview';

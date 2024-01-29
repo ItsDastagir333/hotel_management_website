@@ -1,38 +1,36 @@
-import { groq } from "next-sanity";
+import { groq } from 'next-sanity';
 
-export const getFeaturedRoomQuery = groq`*[_type == 'hotelRoom' && isFeatured == true][0]{
+export const getFeaturedRoomQuery = groq`*[_type == "hotelRoom" && isFeatured == true][0] {
     _id,
     description,
     discount,
-    images, 
-    isFeatured, 
-    name, 
-    price, 
-    slug, 
+    images,
+    isFeatured,
+    name,
+    price,
+    slug,
     coverImage
 }`;
 
-
-export const getRoomsQuery = groq`*[_type == "hotelRoom"]{
-    _id,
+export const getRoomsQuery = groq`*[_type == "hotelRoom"] {
+    _id, 
     coverImage,
     description,
     dimension,
     isBooked,
     isFeatured,
-    name, 
-    price, 
+    name,
+    price,
     slug,
     type
 }`;
 
-
-export const getRoom = groq`*[_type == "hotelRoom" && slug.current == $slug][0]{
-    _id, 
+export const getRoom = groq`*[_type == "hotelRoom" && slug.current == $slug][0] {
+    _id,
     coverImage,
     description,
-    dimension, 
-    discount, 
+    dimension,
+    discount,
     images,
     isBooked,
     isFeatured,
@@ -43,15 +41,14 @@ export const getRoom = groq`*[_type == "hotelRoom" && slug.current == $slug][0]{
     slug,
     specialNote,
     type
+}`;
 
-}`
-
-export const getUserBookingsQuery = groq`*[_type == 'booking' && user._ref == $userId]{
+export const getUserBookingsQuery = groq`*[_type == 'booking' && user._ref == $userId] {
     _id,
-    hotelRoom ->{
-        _id, 
-        name, 
-        slug, 
+    hotelRoom -> {
+        _id,
+        name,
+        slug,
         price
     },
     checkinDate,
@@ -61,10 +58,9 @@ export const getUserBookingsQuery = groq`*[_type == 'booking' && user._ref == $u
     children,
     totalPrice,
     discount
+}`;
 
-}`
-
-export const getUserDataQuery = groq`*[_type == 'user' && _id == '$userId][0] {
+export const getUserDataQuery = groq`*[_type == 'user' && _id == $userId][0] {
     _id,
     name,
     email,
@@ -72,7 +68,7 @@ export const getUserDataQuery = groq`*[_type == 'user' && _id == '$userId][0] {
     about,
     _createdAt,
     image,
-}`
+}`;
 
 export const getRoomReviewsQuery = groq`*[_type == "review" && hotelRoom._ref == $roomId] {
     _createdAt,

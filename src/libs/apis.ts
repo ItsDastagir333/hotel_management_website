@@ -1,7 +1,7 @@
 import { CreateReviewDto, Review } from './../models/review';
 import axios from 'axios';
 
-import { CreateBookingDTO, Room } from '@/models/room';
+import { CreateBookingDto, Room } from '@/models/room';
 import sanityClient from './sanity';
 import * as queries from './sanityQueries';
 import { Booking } from '@/models/booking';
@@ -46,7 +46,7 @@ export const createBooking = async ({
   numberOfDays,
   totalPrice,
   user,
-}: CreateBookingDTO) => {
+}: CreateBookingDto) => {
   const mutation = {
     mutations: [
       {

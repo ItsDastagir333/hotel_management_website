@@ -1,12 +1,12 @@
 import { NextResponse } from 'next/server';
 import Stripe from 'stripe';
 
-import { createBooking} from '@/libs/apis';
+import { createBooking, updateHotelRoom } from '@/libs/apis';
 
 const checkout_session_completed = 'checkout.session.completed';
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY as string, {
-  apiVersion: '2023-10-16',
+  apiVersion: '2023-08-16',
 });
 
 export async function POST(req: Request, res: Response) {
@@ -15,7 +15,6 @@ export async function POST(req: Request, res: Response) {
   const webhookSecret = process.env.STRIPE_WEBHOOK_SECRET;
 
   let event: Stripe.Event;
-  
 
   try {
     if (!sig || !webhookSecret) return;
@@ -23,42 +22,41 @@ export async function POST(req: Request, res: Response) {
   } catch (error: any) {
     return new NextResponse(`Webhook Error: ${error.message}`, { status: 500 });
   }
-  console.log(event);
 
   // load our event
   switch (event.type) {
     case checkout_session_completed:
       const session = event.data.object;
-      console.log(session);
-    //   const {
-    //     // @ts-ignore
-    //     metadata: {
-    //       adults,
-    //       checkinDate,
-    //       checkoutDate,
-    //       children,
-    //       hotelRoom,
-    //       numberOfDays,
-    //       user,
-    //       discount,
-    //       totalPrice,
-    //     },
-    //   } = session;
 
-    //   await createBooking({
-    //     adults: Number(adults),
-    //     checkinDate,
-    //     checkoutDate,
-    //     children: Number(children),
-    //     hotelRoom,
-    //     numberOfDays: Number(numberOfDays),
-    //     discount: Number(discount),
-    //     totalPrice: Number(totalPrice),
-    //     user,
-    //   });
+      const {
+        // @ts-ignore
+        metadata: {
+          adults,
+          checkinDate,
+          checkoutDate,
+          children,
+          hotelRoom,
+          numberOfDays,
+          user,
+          discount,
+          totalPrice,
+        },
+      } = session;
+
+      await createBooking({
+        adults: Number(adults),
+        checkinDate,
+        checkoutDate,
+        children: Number(children),
+        hotelRoom,
+        numberOfDays: Number(numberOfDays),
+        discount: Number(discount),
+        totalPrice: Number(totalPrice),
+        user,
+      });
 
       //   Update hotel Room
-    //   await updateHotelRoom(hotelRoom);
+      await updateHotelRoom(hotelRoom);
 
       return NextResponse.json('Booking successful', {
         status: 200,

@@ -9,10 +9,10 @@ type Props = {
   setRatingText: Dispatch<SetStateAction<string>>;
   reviewSubmitHandler: () => Promise<string | undefined>;
   isSubmittingReview: boolean;
-  toggleRatingModel: () => void;
+  toggleRatingModal: () => void;
 };
 
-const RatingModel: FC<Props> = props => {
+const RatingModal: FC<Props> = props => {
   const {
     isOpen,
     ratingValue,
@@ -21,7 +21,7 @@ const RatingModel: FC<Props> = props => {
     setRatingText,
     reviewSubmitHandler,
     isSubmittingReview,
-    toggleRatingModel,
+    toggleRatingModal,
   } = props;
 
   const starValues = [1, 2, 3, 4, 5];
@@ -79,7 +79,7 @@ const RatingModel: FC<Props> = props => {
             {isSubmittingReview ? 'Submitting' : 'Submit'}
           </button>
           <button
-            onClick={toggleRatingModel}
+            onClick={toggleRatingModal}
             className='ml-2 px-4 py-2 bg-gray-300 text-gray-700 rounded-md hover:bg-gray-400'
           >
             Cancel
@@ -90,4 +90,4 @@ const RatingModel: FC<Props> = props => {
   );
 };
 
-export default RatingModel;
+export default RatingModal;

@@ -1,18 +1,21 @@
-'use client'
+'use client';
 
-import { useState } from "react";
-import Search from "../Search/Search";
+import { useState } from 'react';
 
-const PageSearch = ()=>{
-    const [roomTypeFilter, setRoomTypeFilter] = useState('');
-    const [searchQuery, setSearchQuery] = useState('');
+import Search from '../Search/Search';
 
-    return (<Search 
-    roomTypeFilter={roomTypeFilter}
-    searchQuery={searchQuery}
-    setRoomTypeFilter={setRoomTypeFilter}
-    setSearchQuery={setSearchQuery}
-    />);
+const PageSearch = () => {
+  const [roomTypeFilter, setRoomTypeFilter] = useState('');
+  const [searchQuery, setSearchQuery] = useState('');
+
+  return (
+    <Search
+      roomTypeFilter={roomTypeFilter}
+      searchQuery={searchQuery}
+      setRoomTypeFilter={setRoomTypeFilter}
+      setSearchQuery={setSearchQuery}
+    />
+  );
 };
 
-export default PageSearch
+export default PageSearch;

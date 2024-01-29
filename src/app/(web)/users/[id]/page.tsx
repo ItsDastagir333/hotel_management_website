@@ -14,7 +14,7 @@ import { BsJournalBookmarkFill } from 'react-icons/bs';
 import { GiMoneyStack } from 'react-icons/gi';
 import Table from '@/components/Table/Table';
 import Chart from '@/components/Chart/Chart';
-import RatingModel from '@/components/RatingModel/RatingModel';
+import RatingModal from '@/components/RatingModal/RatingModal';
 import BackDrop from '@/components/BackDrop/BackDrop';
 import toast from 'react-hot-toast';
 
@@ -32,7 +32,7 @@ const UserDetails = (props: { params: { id: string } }) => {
   const [ratingValue, setRatingValue] = useState<number | null>(0);
   const [ratingText, setRatingText] = useState('');
 
-  const toggleRatingModel = () => setIsRatingVisible(prevState => !prevState);
+  const toggleRatingModal = () => setIsRatingVisible(prevState => !prevState);
 
   const reviewSubmitHandler = async () => {
     if (!ratingText.trim().length || !ratingValue) {
@@ -81,15 +81,6 @@ const UserDetails = (props: { params: { id: string } }) => {
     error: errorGettingUserData,
   } = useSWR('/api/users', fetchUserData);
 
-  // if (error || errorGettingUserData) {
-  //   return <div>Error: Unable to fetch user data</div>;
-  // }
-
-  // if (loadingUserData || !userData) {
-  //   return <LoadingSpinner />;
-  // }
-
-
   if (error || errorGettingUserData) throw new Error('Cannot fetch data');
   if (typeof userBookings === 'undefined' && !isLoading)
     throw new Error('Cannot fetch data');
@@ -97,6 +88,7 @@ const UserDetails = (props: { params: { id: string } }) => {
     throw new Error('Cannot fetch data');
 
   if (loadingUserData) return <LoadingSpinner />;
+  if (!userData) throw new Error('Cannot fetch data');
   if (!userData) throw new Error('Cannot fetch data');
 
   return (
@@ -114,7 +106,7 @@ const UserDetails = (props: { params: { id: string } }) => {
           </div>
           <div className='font-normal py-4 text-left'>
             <h6 className='text-xl font-bold pb-3'>About</h6>
-            <p className='text-sm'>{userData.about?? ''}</p>
+            <p className='text-sm'>{userData.about ?? ''}</p>
           </div>
           <div className='font-normal text-left'>
             <h6 className='text-xl font-bold pb-3'>{userData.name}</h6>
@@ -194,7 +186,7 @@ const UserDetails = (props: { params: { id: string } }) => {
               <Table
                 bookingDetails={userBookings}
                 setRoomId={setRoomId}
-                toggleRatingModel={toggleRatingModel}
+                toggleRatingModal={toggleRatingModal}
               />
             )
           ) : (
@@ -209,7 +201,7 @@ const UserDetails = (props: { params: { id: string } }) => {
         </div>
       </div>
 
-      <RatingModel
+      <RatingModal
         isOpen={isRatingVisible}
         ratingValue={ratingValue}
         setRatingValue={setRatingValue}
@@ -217,7 +209,7 @@ const UserDetails = (props: { params: { id: string } }) => {
         setRatingText={setRatingText}
         isSubmittingReview={isSubmittingReview}
         reviewSubmitHandler={reviewSubmitHandler}
-        toggleRatingModel={toggleRatingModel}
+        toggleRatingModal={toggleRatingModal}
       />
       <BackDrop isOpen={isRatingVisible} />
     </div>

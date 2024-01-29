@@ -31,32 +31,32 @@ export async function POST(req: Request, res: Response) {
       const {
         // @ts-ignore
         metadata: {
-          adults,
-          checkinDate,
-          checkoutDate,
-          children,
-          hotelRoom,
-          numberOfDays,
-          user,
-          discount,
-          totalPrice,
+          // adults,
+          // checkinDate,
+          // checkoutDate,
+          // children,
+          // hotelRoom,
+          // numberOfDays,
+          // user,
+          // discount,
+          // totalPrice,
         },
       } = session;
 
-      await createBooking({
-        adults: Number(adults),
-        checkinDate,
-        checkoutDate,
-        children: Number(children),
-        hotelRoom,
-        numberOfDays: Number(numberOfDays),
-        discount: Number(discount),
-        totalPrice: Number(totalPrice),
-        user,
-      });
+      // await createBooking({
+      //   adults: Number(adults),
+      //   checkinDate,
+      //   checkoutDate,
+      //   children: Number(children),
+      //   hotelRoom,
+      //   numberOfDays: Number(numberOfDays),
+      //   discount: Number(discount),
+      //   totalPrice: Number(totalPrice),
+      //   user,
+      // });
 
-      //   Update hotel Room
-      await updateHotelRoom(hotelRoom);
+      // //   Update hotel Room
+      // await updateHotelRoom(hotelRoom);
 
       return NextResponse.json('Booking successful', {
         status: 200,

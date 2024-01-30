@@ -1,39 +1,40 @@
-import { FC, useEffect, useState } from 'react';
+import { timeStamp } from "console";
+import { FC, useEffect, useState } from "react";
+
 
 type Props = {
-  endValue: number;
-  duration: number;
-};
+    endValue: number;
+    duration: number;
+}
 
-const CountUpNumber: FC<Props> = ({ endValue, duration }) => {
-  const [count, setCount] = useState(0);
+const CountUpNumber: FC<Props> = ({endValue, duration}) =>{
 
-  useEffect(() => {
-    let startTime: number;
-    let animationFrameId: number;
+    const [count, setCount] = useState(0);
 
-    const updateCount = (timestamp: number) => {
-      if (!startTime) startTime = timestamp;
-      const progress = timestamp - startTime;
+    useEffect(()=>{
+        let startTime: number;
+        let animationFrameId : number;
 
-      if (progress < duration) {
-        setCount(Math.min(endValue, (progress / duration) * endValue));
+
+        const updateCount = (timestamp: number) => {
+            if(!startTime) startTime = timestamp;
+            const progress = timestamp -startTime;
+
+            if(progress<duration){
+                setCount(Math.min(endValue, (progress/duration)*endValue));
+                animationFrameId = requestAnimationFrame(updateCount)
+            }
+            else{
+                setCount(endValue);
+            }
+        };
         animationFrameId = requestAnimationFrame(updateCount);
-      } else {
-        setCount(endValue);
-      }
-    };
 
-    animationFrameId = requestAnimationFrame(updateCount);
-
-    return () => cancelAnimationFrame(animationFrameId);
-  }, [endValue, duration]);
-
-  return (
-    <p className='md:font-bold font-medium text-lg xl:text-5xl'>
-      {Math.round(count)}
-    </p>
-  );
+        return ()=> cancelAnimationFrame(animationFrameId)
+    }, [endValue, duration]);
+    return (
+        <p className="md:font-bold font-medium text-lg xl:text-5xl">{Math.round(count)}</p>
+    )
 };
 
 export default CountUpNumber;

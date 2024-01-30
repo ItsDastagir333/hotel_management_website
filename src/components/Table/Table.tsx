@@ -8,10 +8,10 @@ import { Booking } from '@/models/booking';
 type Props = {
   bookingDetails: Booking[];
   setRoomId: Dispatch<SetStateAction<string | null>>;
-  toggleRatingModal: () => void;
+  toggleRatingModel: () => void;
 };
 
-const Table: FC<Props> = ({ bookingDetails, setRoomId, toggleRatingModal }) => {
+const Table: FC<Props> = ({ bookingDetails, setRoomId, toggleRatingModel }) => {
   const router = useRouter();
 
   return (
@@ -51,7 +51,7 @@ const Table: FC<Props> = ({ bookingDetails, setRoomId, toggleRatingModal }) => {
                 <button
                   onClick={() => {
                     setRoomId(booking.hotelRoom._id);
-                    toggleRatingModal()
+                    toggleRatingModel()
                   }}
                   className='font-medium text-blue-600 hover:underline'
                 >

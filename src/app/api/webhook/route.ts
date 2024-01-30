@@ -1,7 +1,7 @@
 import { NextResponse } from 'next/server';
 import Stripe from 'stripe';
 
-import { createBooking, updateHotelRoom } from '@/libs/apis';
+import { createBooking} from '@/libs/apis';
 
 const checkout_session_completed = 'checkout.session.completed';
 
@@ -15,6 +15,7 @@ export async function POST(req: Request, res: Response) {
   const webhookSecret = process.env.STRIPE_WEBHOOK_SECRET;
 
   let event: Stripe.Event;
+  
 
   try {
     if (!sig || !webhookSecret) return;
@@ -22,6 +23,7 @@ export async function POST(req: Request, res: Response) {
   } catch (error: any) {
     return new NextResponse(`Webhook Error: ${error.message}`, { status: 500 });
   }
+  console.log(event);
 
   // load our event
   switch (event.type) {
@@ -31,32 +33,32 @@ export async function POST(req: Request, res: Response) {
       const {
         // @ts-ignore
         metadata: {
-          // adults,
-          // checkinDate,
-          // checkoutDate,
-          // children,
-          // hotelRoom,
-          // numberOfDays,
-          // user,
-          // discount,
-          // totalPrice,
+          adults,
+          checkinDate,
+          checkoutDate,
+          children,
+          hotelRoom,
+          numberOfDays,
+          user,
+          discount,
+          totalPrice,
         },
       } = session;
 
-      // await createBooking({
-      //   adults: Number(adults),
-      //   checkinDate,
-      //   checkoutDate,
-      //   children: Number(children),
-      //   hotelRoom,
-      //   numberOfDays: Number(numberOfDays),
-      //   discount: Number(discount),
-      //   totalPrice: Number(totalPrice),
-      //   user,
-      // });
+      await createBooking({
+        adults: Number(adults),
+        checkinDate,
+        checkoutDate,
+        children: Number(children),
+        hotelRoom,
+        numberOfDays: Number(numberOfDays),
+        discount: Number(discount),
+        totalPrice: Number(totalPrice),
+        user,
+      });
 
-      // //   Update hotel Room
-      // await updateHotelRoom(hotelRoom);
+      //   Update hotel Room
+      await updateHotelRoom(hotelRoom);
 
       return NextResponse.json('Booking successful', {
         status: 200,

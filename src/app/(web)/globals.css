@@ -11,11 +11,15 @@
 }
 
 .btn-primary {
-  @apply px-6 md:px-[50px] lg:px-[72px] py-2 md:py-5 bg-primary rounded-lg md:rounded-2xl shadow-sm shadow-primary text-white font-bold text-base md:text-xl hover:scale-110 duration-300 transition-all;
+  @apply px-6 md:px-[50px] lg:px-[72px] py-2 md:py-5 
+  bg-primary rounded-lg md:rounded-2xl shadow-sm shadow-primary text-white 
+  font-bold text-base md:text-xl hover:scale-110 duration-300 transition-all;
 }
 
 .btn-tertiary {
-  @apply px-6 md:px-[50px] lg:px-[72px] py-2 md:py-5 bg-tertiary-light rounded-lg md:rounded-2xl shadow-sm shadow-tertiary-light text-white font-bold text-base md:text-xl hover:scale-110 duration-300 transition-all;
+  @apply px-6 md:px-[50px] lg:px-[72px] py-2 md:py-5 bg-tertiary-light 
+  rounded-lg md:rounded-2xl shadow-sm shadow-tertiary-light text-white 
+  font-bold text-base md:text-xl hover:scale-110 duration-300 transition-all;
 }
 
 .font-heading {
@@ -23,5 +27,5 @@
 }
 
 .font-normal {
-  @apply text-sm md:text-base;
+  @apply text-sm md:text-base;
 }
